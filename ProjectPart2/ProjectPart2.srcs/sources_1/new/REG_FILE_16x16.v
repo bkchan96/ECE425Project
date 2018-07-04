@@ -8,6 +8,18 @@ module REG_FILE_16x16(WADR, WEN, clk, RADR1, RADR2, OUT1, OUT2, ALUIN);
 
     reg [15:0] REGFILE[15:0]; //Declare memory => 16 bits wide x 16 memory locations
     
+    integer i; //Declare counter for use in a for loop later
+    
+    //Initialize all register entries to 0
+    initial
+    begin
+        for(i = 0; i < 16; i=i+1)
+        begin
+            REGFILE[i] = 0;
+        end
+    end
+    
+    //Run function of register file
     always @ (posedge clk)
     begin
         if (WEN == 1)
