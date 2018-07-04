@@ -12,11 +12,8 @@ module REG_FILE_16x16(WADR, WEN, clk, RADR1, RADR2, OUT1, OUT2, ALUIN);
     begin
         if (WEN == 1)
             REGFILE[WADR] = ALUIN; //Write operation when WEN == 1
-        else
-        begin
-            OUT1 = REGFILE[RADR1]; //Read from requested register
-            OUT2 = REGFILE[RADR2]; //Read from requested register
-        end
+        OUT1 = REGFILE[RADR1]; //Read from requested register
+        OUT2 = REGFILE[RADR2]; //Read from requested register
     end
 
 endmodule
