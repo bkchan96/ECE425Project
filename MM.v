@@ -26,10 +26,11 @@ module MM(ALUIN,WD,WE,clk,MR,OUT);
     begin
         if (WE == 1)
             REGFILE[ALUIN[3:0]] = WD; //Write operation when WEN == 1
-        else
-        begin
-            MEMOUT = REGFILE[ALUIN]; //Read from requested register
-        end
+    end
+    
+    always @(*)
+    begin
+        MEMOUT = REGFILE[ALUIN[3:0]]; //Read from requested register
     end
     
 endmodule

@@ -7,6 +7,7 @@ module CPU(clk);
     wire [2:0] ALUC;
     wire MW, MR, ALUSRC, RW;
     wire [3:0] OPCODE, FIELD1, FIELD2, FIELD3;
+    wire [3:0] RADR2MUXOUT;
     
     assign {OPCODE, FIELD1, FIELD2, FIELD3} = IOUT;
     
@@ -33,9 +34,16 @@ module CPU(clk);
     
     MUX_16bit uALUMUX(
         .IN0(REG_OUT2),
-        .IN1(FIELD3),
+        .IN1({12'b000000000000, FIELD3}),
         .SEL(ALUSRC),
         .OUT(MUXtoALU)
+    );
+    
+    MUX_4bit uRADR2MUX(
+        .IN0(FIELD3),
+        .IN1(FIELD1),
+        .SEL(MW),
+        .OUT(RADR2MUXOUT)
     );
     
     IM uIM(
@@ -50,7 +58,7 @@ module CPU(clk);
         .WEN(RW),             //1 bit write enable
         .clk(clk),             //clock
         .RADR1(FIELD2),           //[3:0] read address 1
-        .RADR2(FIELD3),   //[3:0] read address 1
+        .RADR2(RADR2MUXOUT),   //[3:0] read address 1
         .OUT1(REG_OUT1),            //[15:0] output 1
         .OUT2(REG_OUT2),            //[15:0] output 2
         .DIN(MMOUT)              //[15:0] data in 
@@ -58,7 +66,7 @@ module CPU(clk);
     
     MM UMM(
         .ALUIN(ALUOUT),       //[15:0] input from alu
-        .WD(FIELD1),  //[15:0] write data
+        .WD(REG_OUT2),  //[15:0] write data
         .WE(MW),      //1 bit write enable
         .clk(clk),     //clock
         .MR(MR),      //1 bit MemtoReg

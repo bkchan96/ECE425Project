@@ -1,6 +1,5 @@
 `timescale 1ns / 1ps
 
-
 module CPU_testbench();
 
 reg clk;
@@ -14,7 +13,12 @@ initial
     begin 
         clk = 0;
         forever #0.5 clk = ~clk;
-    end 
+    end
+initial
+begin
+    #18
+    $finish;
+end
 
 
 endmodule

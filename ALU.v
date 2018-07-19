@@ -9,7 +9,7 @@ module ALU(S, A, B, F, Z);
     always @ (S, A, B)
     begin
         case(S)
-            0:F =A&B;
+            0:F=A&B;
             1:F=A|B;
             2:F=A+B;
             4:F=A&(~B);
