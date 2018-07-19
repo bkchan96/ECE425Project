@@ -10,7 +10,7 @@ module control(
 	always @(*) begin
 		/* defaults */
 		ALUControl[2:0]	<= 3'b000;
-		alusrc			<= 1'b0;
+		ALUSrc			<= 1'b0;
 		branch			<= 1'b0;
 		memtoreg		<= 1'b0;
 		memwrite		<= 1'b0;
@@ -19,31 +19,31 @@ module control(
 		case (opcode)
 			4'b0000: begin	/* add */
 				ALUControl[2:0]	<= 3'b010;
-				alusrc   		<= 1'b0;
+				ALUSrc   		<= 1'b0;
 				memtoreg		<= 1'b1;
 			end
 			4'b0001: begin	/* addi */
 				ALUControl[2:0]	<= 3'b010;
-				alusrc   		<= 1'b1;
+				ALUSrc   		<= 1'b1;
 				memtoreg		<= 1'b1;
 			end
 			4'b0010: begin	/* sub */
 				ALUControl[2:0]	<= 3'b110;
-				alusrc   		<= 1'b0;
+				ALUSrc   		<= 1'b0;
 				memtoreg		<= 1'b1;
 			end
 			4'b0011: begin	/* and */
 				ALUControl[2:0]	<= 3'b000;
-				alusrc   		<= 1'b0;
+				ALUSrc   		<= 1'b0;
 				memtoreg		<= 1'b1;
 			end
 			4'b0100: begin	/* lw */
 				ALUControl[2:0]	<= 3'b010;
-				alusrc   		<= 1'b1;
+				ALUSrc   		<= 1'b1;
 			end
 			4'b0101: begin	/* sw */
 				ALUControl[2:0]	<= 3'b010;
-				alusrc   		<= 1'b1;
+				ALUSrc   		<= 1'b1;
 				memwrite		<= 1'b1;
 			end
 			4'b0110: begin	/* bne */
