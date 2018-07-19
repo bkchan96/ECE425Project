@@ -38,18 +38,22 @@ module CONTROL(
 				ALUControl[2:0]	<= 3'b010;
 				alusrc   		<= 1'b1;
 				memtoreg        <= 1'b1;
+				regwrite		<= 1'b0;
 			end
 			4'b0101: begin	/* sw */
 				ALUControl[2:0]	<= 3'b010;
 				alusrc   		<= 1'b1;
 				memwrite		<= 1'b1;
+				regwrite		<= 1'b0;
 			end
 			4'b0110: begin	/* bne */
 				ALUControl[2:0]	<= 3'b110;
 				branch 			<= 1'b1;
+				regwrite		<= 1'b0;
 			end
 			4'b0111: begin	/* j */
 				branch 			<= 1'b1;
+				regwrite		<= 1'b0;
 			end
 		endcase
 	end
