@@ -13,8 +13,14 @@ module MM(ALUIN,WD,WE,clk,MR,OUT);
         .IN1(MEMOUT), 
         .SEL(MR), 
         .OUT(OUT)
-   );
+    );
     
+    integer i;
+    initial
+    begin
+        for(i = 0; i < 16; i = i + 1)
+            REGFILE[i] = 0;
+    end
     
     always @ (posedge clk)
     begin
